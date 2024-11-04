@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: rdshelp
+Version: 1.0.0
+Summary: AWS RDS utility functions for database and table creation through panda dataframes
+Home-page: https://github.com/ajwinters/rdshelp
+Author: Alex Winters
+Author-email: awin117@gmail.com
+Requires-Dist: psycopg2
+Requires-Dist: numpy
+Requires-Dist: pandas

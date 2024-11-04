@@ -1,0 +1,8 @@
+README.md
+rdshelp.py
+setup.py
+rdshelp.egg-info/PKG-INFO
+rdshelp.egg-info/SOURCES.txt
+rdshelp.egg-info/dependency_links.txt
+rdshelp.egg-info/requires.txt
+rdshelp.egg-info/top_level.txt
