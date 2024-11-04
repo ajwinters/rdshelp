@@ -167,4 +167,8 @@ def fetch_table_to_dataframe(conn, table_name):
 #     result = list(difference)
 #     return result
 
-
+def drop_table(conn,table_name):
+    ### DROP TABLES
+    cursor = conn.cursor()
+    cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+    conn.commit()
