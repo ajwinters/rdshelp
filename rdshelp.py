@@ -157,18 +157,44 @@ def fetch_table_to_dataframe(conn, table_name):
         print(f"Error: {e}")
         return None
     
-# def set_difference(conn,tablename):
-#     allgames = fetch_table_data(conn,"mastergames")
-#     allgameslist = allgames['gameid'].to_list()
+def set_difference(conn,tablename):
+    allgames = fetch_table_data(conn,"mastergames")
+    allgameslist = allgames['gameid'].to_list()
 
-#     tablegames = fetch_table_data(conn,tablename)
-#     tablegameslist = tablegames['gameid'].to_list()
-#     difference = set(allgameslist) - set(tablegameslist)
-#     result = list(difference)
-#     return result
+    tablegames = fetch_table_data(conn,tablename)
+    tablegameslist = tablegames['gameid'].to_list()
+    difference = set(allgameslist) - set(tablegameslist)
+    result = list(difference)
+    return result
 
 def drop_table(conn,table_name):
     ### DROP TABLES
     cursor = conn.cursor()
     cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
     conn.commit()
+    print(f"Table {table_name} has been dropped")
+
+def query_table(conn,input_query):
+    # Create a cursor object
+    cur = conn.cursor()
+    
+    try:
+        # Execute the SQL query to fetch all data from the table
+        query = f"{input_query};"
+        cur.execute(query)
+        
+        # Fetch all the data
+        data = cur.fetchall()
+        
+        # Get the column names from the cursor
+        colnames = [desc[0] for desc in cur.description]
+        
+        # Convert the data into a pandas DataFrame
+        df = pd.DataFrame(data, columns=colnames)
+        
+        print(f"Query executed successfully")
+        return df
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
