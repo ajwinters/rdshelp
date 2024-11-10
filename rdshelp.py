@@ -169,9 +169,11 @@ def set_difference(conn,tablename):
 
 def drop_table(conn,table_name):
     ### DROP TABLES
+    conn.autocommit = True
     cursor = conn.cursor()
     cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
     conn.commit()
+
     print(f"Table {table_name} has been dropped")
 
 def query_table(conn,input_query):
