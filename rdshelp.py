@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import psycopg2
 from psycopg2.extras import execute_batch  # Import execute_batch from extras
 import re
@@ -109,6 +108,7 @@ def insert_dataframe_to_rds(conn, df, table_name):
     cur = conn.cursor()
     
     # Prepare a SQL query for inserting data
+    df = clean_column_names(df)
     columns = df.columns
     insert_query = sql.SQL("INSERT INTO {table} ({fields}) VALUES ({values})").format(
         table=sql.Identifier(table_name),
