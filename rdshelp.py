@@ -157,7 +157,17 @@ def fetch_table_to_dataframe(conn, table_name):
         print(f"Error: {e}")
         return None
     
-def set_difference(conn,tablename):
+# def set_difference(conn,tablename):
+#     allgames = fetch_table_data(conn,"mastergames")
+#     allgameslist = allgames['gameid'].to_list()
+
+#     tablegames = fetch_table_data(conn,tablename)
+#     tablegameslist = tablegames['gameid'].to_list()
+#     difference = set(allgameslist) - set(tablegameslist)
+#     result = list(difference)
+#     return result
+
+def game_difference(conn,tablename):
     allgames = fetch_table_data(conn,"mastergames")
     allgameslist = allgames['gameid'].to_list()
 
@@ -166,6 +176,17 @@ def set_difference(conn,tablename):
     difference = set(allgameslist) - set(tablegameslist)
     result = list(difference)
     return result
+
+def player_difference(conn,tablename):
+    allplayers = fetch_table_data(conn,"masterplayers")
+    allplayerslist = allplayers['playerid'].to_list()
+
+    tableplayers = fetch_table_data(conn,tablename)
+    tableplayerslist = tableplayers['playerid'].to_list()
+    difference = set(allplayerslist) - set(tableplayerslist)
+    result = list(difference)
+    return result
+
 
 def drop_table(conn,table_name):
     ### DROP TABLES
