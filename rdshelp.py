@@ -20,6 +20,8 @@ def connect_to_rds(db_name, username, password, host, port=5432):
         print(f"Error connecting to RDS: {str(e)}")
         return None
 
+
+
 def clean_column_names(df):
     # Function to remove special characters and spaces, and convert to lowercase
     df.columns = [re.sub(r'[^a-zA-Z0-9]', '', col).lower() for col in df.columns]
@@ -220,5 +222,33 @@ def query_table(conn,input_query):
     except Exception as e:
         print(f"Error: {e}")
         return None
+    
+
+def execute_query(conn, input_query):
+    """
+    Executes a SQL query using the provided connection object.
+    
+    :param conn: psycopg2 connection object.
+    :param input_query: The SQL query to execute.
+    """
+    # Create a cursor object
+    cur = conn.cursor()
+    
+    try:
+        # Execute the SQL query
+        cur.execute(input_query)
+        
+        # Commit the transaction
+        conn.commit()
+        
+        print("Query executed and committed successfully.")
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        conn.rollback()  # Rollback in case of error
+    
+    finally:
+        # Close the cursor
+        cur.close()
 
 #### 

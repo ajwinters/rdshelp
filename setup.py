@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="rdshelp",
-    version="1.2.0",
+    version="1.2.1",
     packages=find_packages(),
     py_modules=["rdshelp"],  # Name of your Python file
     install_requires=["psycopg2-binary","numpy","pandas"],  # Add any dependencies here if needed
